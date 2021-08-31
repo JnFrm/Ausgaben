@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Aug 31 17:45:21 2021
+
+@author: nounou
+"""
+import pandas as pd
+
+
+#definiert neue Klasse Ausgabe
+class Ausgabe:
+    def __init__(self, Datum, Wert, Zweck, Ort):
+        
+        self.Datum = Datum
+        self.Wert = Wert
+        self.Zweck = Zweck
+        self.Ort = Ort
+        
+#definiert Klasse Datum zwecks besserer interner Verständlichkeit
+class Datum:
+    def __init__(self, Tag, Monat, Jahr):
+        self.Tag = Tag
+        self.Monat = Monat
+        self.Jahr = Jahr
+        
+        
+Ausgaben = []   
+        
+#wert = float(input("Wieviel ? "))
+#datum_input = input("Wann ? Bitte in TT.MM.JJJJ ")
+#Tag, Monat, Jahr = map(int, datum_input.split('.'))
+#datum = Datum(Tag, Monat, Jahr)
+#zweck = input("Wofür ? ")
+#ort = input("Wo ?")    
+
+#neueAusgabe = Ausgabe( wert, datum, zweck, ort)
+#Ausgaben.append(neueAusgabe)
+
+#print( "\n", neueAusgabe.Wert, "\n", datum.Tag, "-", datum.Monat,"-", datum.Jahr, "\n", neueAusgabe.Zweck, "\n", neueAusgabe.Ort)
+
+
+def AusgabeChecken(i):
+    neueAusgabe = Ausgaben[i]
+    print( neueAusgabe.Datum.Tag, "-", neueAusgabe.Datum.Monat,"-", neueAusgabe.Datum.Jahr,  "\n", neueAusgabe.Wert, "\n", neueAusgabe.Zweck, "\n", neueAusgabe.Ort)
+
+
+
+
+
+
+def Ausgabe_neu(wert):
+            
+        AusgabenCSV = pd.read_csv("/home/nounou/Desktop/BA/GitHub/BThesis-main/Ausgaben.csv")
+        
+        datum_input = input("Wann ? Bitte in TT.MM.JJJJ ")
+        Tag, Monat, Jahr = map(int, datum_input.split('.'))
+        datum = Datum(Tag, Monat, Jahr) 
+        zweck = input("Wofür ? ")
+        ort = input("Wo ?")
+        
+        #Ausgaben.append(Ausgabe(datum, wert, zweck, ort))
+
+        dataframe = pd.DataFrame([[[Tag, Monat, Jahr], wert, zweck, ort]], columns = ["Datum", "Wert", "Zweck", "Ort"])
+        
+        print(dataframe)
+        
+        AusgabenCSV.append(dataframe, ignore_index = True)
+
+
+
+
+
+#AusgabenCSV = pd.DataFrame([0, 1, 2, 3],columns = ["Datum", "Wert", "Zweck", "Ort"])
+        
+
+AusgabenCSV.to_csv("/home/nounou/Desktop/BA/GitHub/BThesis-main/Ausgaben.csv", sep = ",")
+
+
+
